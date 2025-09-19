@@ -1,8 +1,23 @@
 /* Max: A ludo board is best represented as a square containing 15x15 smaller squares. I've declared small-tile-size to represent the minimal size unit that the elements of the board will be based on. If I want to change the board size, I only need to change the size set by board-size and the remaining custom properties will be changed accordingly.*/
 
+/* Max: Using media queries will ensure the board size is maximized no matter the aspect ratio of the window. */
+
+/* For any landscape (horizontal) aspect ratio, board size will depend on the window's width. */
+@media (max-aspect-ratio: 1) {
+ :root {
+    --board-size: 90vw;
+ }
+}
+
+/* For any portrait (vertical) aspect ratio, board size will depend on the window's width. */
+@media (min-aspect-ratio: 1) {
+ :root {
+    --board-size: 90vh;
+ }
+}
+
+
 :root {
-    /* modify the 'board-size' custom property to change the overall board size */
-    --board-size: 90vw; 
     --small-tile-size: calc(var(--board-size)/15);
     --large-tile-size: calc(var(--small-tile-size) * 6);
     --med-tile-size: calc(var(--small-tile-size) * 3);
