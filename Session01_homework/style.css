@@ -1,0 +1,180 @@
+/* Max: A ludo board is best represented as a square containing 15x15 smaller squares. I've declared small-tile-size to represent the minimal size unit that the elements of the board will be based on. If I want to change the board size, I only need to change the size set by board-size and the remaining custom properties will be changed accordingly.*/
+
+:root {
+    /* modify the 'board-size' custom property to change the overall board size */
+    --board-size: 90vw; 
+    --small-tile-size: calc(var(--board-size)/15);
+    --large-tile-size: calc(var(--small-tile-size) * 6);
+    --med-tile-size: calc(var(--small-tile-size) * 3);
+    --inner-center-tile-size: calc(var(--med-tile-size) / 2);
+    --inner-corner-size: calc(var(--small-tile-size) * 4);
+}
+
+#board-wrapper {
+    justify-self: center;
+    display: flex;
+    justify-content: space-between;
+    flex-flow: row wrap;
+    align-items: space-between;
+    width: var(--board-size);
+    height: var(--board-size);
+    border: 1px solid #000;
+
+}
+
+
+/* colors */
+
+.red, .red * {
+    background-color: red;
+}
+
+.green, .green * {
+    background-color: green;
+}
+
+.blue, .blue * {
+    background-color: blue;
+}
+
+.yellow, .yellow * {
+    background-color: yellow;
+}
+
+
+/* corner squares */
+
+.corner-square {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: var(--large-tile-size);
+    height: var(--large-tile-size);
+    outline: 1px solid #000;
+}
+
+.inner-corner-square {
+    display: flex;
+    flex-direction: column;
+    justify-content:space-evenly;
+    background-color: #fff !important;
+    outline: 1px solid #000;
+    width: var(--inner-corner-size);
+    height: var(--inner-corner-size);
+}
+
+.inner-tile-wrapper {
+    width: var(--inner-corner-size);
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    background-color: #fff !important;
+}
+
+.inner-corner-tile {
+    width: var(--small-tile-size);
+    height: var(--small-tile-size);
+    border-radius: 50%;
+    outline: 1px solid #000;
+}
+
+/* spacer rectangles */
+
+.spacer-rectangle-vertical {
+    display: flex;
+    flex-flow: column wrap;
+    width: var(--med-tile-size);
+    height: var(--large-tile-size);
+    
+}
+
+.spacer-inner-tile {
+    width: var(--small-tile-size);
+    height: var(--small-tile-size);
+    outline: 1px solid #000;
+    /* background-color: #fff; */
+}
+
+.green > .spacer-inner-tile:nth-child(-n+7),
+.green > .spacer-inner-tile:nth-child(n+15),
+.green > .spacer-inner-tile:nth-child(13) 
+{
+    background-color: #fff;
+}
+
+.blue > .spacer-inner-tile:nth-child(-n+4),
+.blue > .spacer-inner-tile:nth-child(n+12),
+.blue > .spacer-inner-tile:nth-child(6) 
+{
+    background-color: #fff;
+}
+
+.red > .spacer-inner-tile:nth-child(n+13),
+.red > .spacer-inner-tile:nth-child(1),
+.red > .spacer-inner-tile:nth-child(3),
+.red > .spacer-inner-tile:nth-child(4),
+.red > .spacer-inner-tile:nth-child(5),
+.red > .spacer-inner-tile:nth-child(6),
+.red > .spacer-inner-tile:nth-child(7)
+{
+    background-color: #fff;
+}
+
+.yellow > .spacer-inner-tile:nth-child(-n+6),
+.yellow > .spacer-inner-tile:nth-child(12),
+.yellow > .spacer-inner-tile:nth-child(13),
+.yellow > .spacer-inner-tile:nth-child(14),
+.yellow > .spacer-inner-tile:nth-child(15),
+.yellow > .spacer-inner-tile:nth-child(16),
+.yellow > .spacer-inner-tile:nth-child(18)
+{
+    background-color: #fff;
+}
+
+.spacer-rectangle-horizontal {
+    display: flex;
+    flex-flow: row wrap;
+    width: var(--large-tile-size);
+    height: var(--med-tile-size);
+}
+
+
+/* center square */
+
+#center-square {
+    width: var(--med-tile-size);
+    height: var(--med-tile-size);
+    display: flex;
+    flex-flow: row wrap;
+    outline: 1px solid #000;
+    /* background-color: #fff; */
+    /* background: linear-gradient(45deg, red 0 50%, blue 50% 100%); */
+}
+
+/* Max: I can style the center square's coloured triangular sections by dividing it into 4 tiles in a 2x2 arrangement, and then dividing each tile diagonally using a linear-gradient. */
+
+.inner-center-tile {
+    width: var(--inner-center-tile-size);
+    height: var(--inner-center-tile-size);
+}
+
+.inner-center-tile:nth-child(1) {
+    background:
+        linear-gradient(45deg, red 0 50%, green 50% 100%);
+}
+
+.inner-center-tile:nth-child(2) {
+    background:
+        linear-gradient(135deg, green 0 50%, yellow 50% 100%);
+}
+
+.inner-center-tile:nth-child(3) {
+    background:
+        linear-gradient(135deg, red 0 50%, blue 50% 100%);
+}
+
+.inner-center-tile:nth-child(4) {
+    background:
+        linear-gradient(45deg, blue 0 50%, yellow 50% 100%);
+}
+
